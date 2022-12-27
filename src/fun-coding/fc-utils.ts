@@ -1,3 +1,5 @@
+import * as vscode from "vscode";
+
 type TCSSObject = Record<string, any>;
 
 export class FCUtils {
@@ -13,5 +15,16 @@ export class FCUtils {
       .join(" ");
 
     return cssString;
+  }
+
+  public static getCurrentCursorPositionVscodeRange() {
+    const editor = vscode.window.activeTextEditor!;
+    const cursorPosition = editor.selection.active;
+    return new vscode.Range(cursorPosition, cursorPosition);
+  }
+
+  public static getCurrentFontSize(): number {
+    const workSpaceConfiguration = vscode.workspace.getConfiguration();
+    return workSpaceConfiguration.get("editor.fontSize") ?? 12;
   }
 }
