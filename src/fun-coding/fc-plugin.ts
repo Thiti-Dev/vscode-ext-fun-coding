@@ -1,4 +1,3 @@
-import * as vscode from "vscode";
 import type { TextDocumentChangeEvent } from "vscode";
 import { ICoreEvents } from "../interfaces/core-events";
 import { SimulateShaker } from "../simulate-shaker/simulate-shaker";
@@ -56,6 +55,7 @@ export class FCPlugin implements CoreEventsOverridedMethods {
     // ─────────────────────────────────────────────────────────────
 
     // ─── Derive Tasks ────────────────────────────────────────────
+    Displayer.triggerComboStageDisplay();
     this.shakerInstance.onTyping();
     // ─────────────────────────────────────────────────────────────
   }
