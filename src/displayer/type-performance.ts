@@ -56,7 +56,7 @@ export class TypePerformance {
         light: createComboCountAfterDecoration(true),
       });
 
-    const editor = this.editor!;
+    const editor = this.editor;
     const cursorPosition = editor.selection.active;
     const range = new vscode.Range(cursorPosition, cursorPosition);
     this.editor.setDecorations(this.typePerformanceDecoration, [range]);
