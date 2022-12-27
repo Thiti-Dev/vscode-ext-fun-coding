@@ -1,16 +1,33 @@
 {
   "name": "fun-coding",
-  "displayName": "FunCoding",
+  "displayName": "Fun Coding",
   "description": "this makes you fun while coding",
   "version": "0.0.1",
+  "publisher": "",
+  "icon": "images/icon.jpeg",
+  "author": {
+    "name": "Thiti Mahawannakit",
+    "email": "thiti.mwk.main@gmail.com",
+    "url": "https://github.com/Thiti-Dev"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Thiti-Dev/vscode-ext-fun-coding/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Thiti-Dev/vscode-ext-fun-coding.git"
+  },
+  "homepage": "https://github.com/Thiti-Dev/vscode-ext-fun-coding",
   "engines": {
     "vscode": "^1.74.0"
   },
   "categories": [
+    "Themes",
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
   "main": "./dist/extension.js",
   "contributes": {
