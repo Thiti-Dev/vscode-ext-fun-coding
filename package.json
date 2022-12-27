@@ -3,7 +3,7 @@
   "displayName": "Fun Coding",
   "description": "this makes you fun while coding",
   "version": "0.0.1",
-  "publisher": "",
+  "publisher": "Thiti-Dev",
   "icon": "images/icon.jpeg",
   "author": {
     "name": "Thiti Mahawannakit",
@@ -35,6 +35,7 @@
   },
   "scripts": {
     "vscode:prepublish": "pnpm run package",
+    "create:package": "npm upgrade && vsce package && rm package-lock.json && pnpm upgrade",
     "compile": "webpack",
     "watch": "webpack --watch",
     "package": "webpack --mode production --devtool hidden-source-map",
@@ -45,19 +46,20 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.74.0",
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.1",
-    "@types/node": "16.x",
-    "@typescript-eslint/eslint-plugin": "^5.45.0",
-    "@typescript-eslint/parser": "^5.45.0",
-    "eslint": "^8.28.0",
+    "@types/node": "~16.18.11",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
+    "@vscode/test-electron": "^2.2.1",
+    "eslint": "^8.30.0",
     "glob": "^8.0.3",
-    "mocha": "^10.1.0",
-    "typescript": "^4.9.3",
-    "ts-loader": "^9.4.1",
+    "mocha": "^10.2.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.4",
+    "vsce": "^2.15.0",
     "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.0",
-    "@vscode/test-electron": "^2.2.0"
+    "webpack-cli": "^5.0.1"
   }
 }
