@@ -11,7 +11,6 @@ type TTextDecorationPos =
 
 export class SimulateShaker implements ICoreEvents {
   private shakeDecorations: vscode.TextEditorDecorationType[] = [];
-  private editor: TextEditor | undefined;
   private fullRange = [
     new vscode.Range(
       new vscode.Position(0, 0),
@@ -35,8 +34,6 @@ export class SimulateShaker implements ICoreEvents {
     return this.shakeDecorations[creationOrder.indexOf(type)];
   }
   private init() {
-    this.editor = vscode.window.activeTextEditor;
-
     const nX = vscode.window.createTextEditorDecorationType({
       textDecoration: `none; margin-left: 0px;`,
     });
@@ -55,14 +52,15 @@ export class SimulateShaker implements ICoreEvents {
     this.shakeDecorations = [nX, pX, nY, pY];
   }
   private simulateUnShake() {
+    const editor = vscode.window.activeTextEditor!;
     this.shakeDecorations.forEach((decoration) => {
       try {
-        this.editor?.setDecorations(decoration, []);
+        editor.setDecorations(decoration, []);
       } catch {}
     });
   }
   private simulateShaking() {
-    const { editor } = this;
+    const editor = vscode.window.activeTextEditor;
     if (!editor) return;
     const xRanges = [];
     for (let i = 0; i < editor.document.lineCount; i++) {

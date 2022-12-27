@@ -5,10 +5,8 @@ import { FCUtils } from "../fun-coding/fc-utils";
 
 export class TypePerformance {
   private static readonly DEFAULT_CSS = FCUtils.cssObjectToString({
-    // position: "absolute",
-    // right: "5%",
-    // top: "20px",
-    ["padding-left"]: "20px",
+    position: "relative",
+    ["padding-left"]: "10px",
     ["font-family"]: "monospace",
     ["font-weight"]: "900",
     ["z-index"]: 1,
@@ -17,7 +15,6 @@ export class TypePerformance {
   });
   private typePerformanceDecoration: TextEditorDecorationType | undefined;
   private typePerformanceTimeout: NodeJS.Timeout | null = null;
-  private editor = vscode.window.activeTextEditor!;
 
   public displayPerformance() {
     this.createTypePerformanceDecoration();
@@ -56,10 +53,10 @@ export class TypePerformance {
         light: createComboCountAfterDecoration(true),
       });
 
-    const editor = this.editor;
+    const editor = vscode.window.activeTextEditor!;
     const cursorPosition = editor.selection.active;
     const range = new vscode.Range(cursorPosition, cursorPosition);
-    this.editor.setDecorations(this.typePerformanceDecoration, [range]);
+    editor.setDecorations(this.typePerformanceDecoration, [range]);
 
     const pastDecor = this.typePerformanceDecoration;
     setTimeout(() => {
