@@ -37,6 +37,8 @@ export class FCPlugin implements CoreEventsOverridedMethods {
     }
     FCPlugin.typeStreak++;
 
+    if (FCPlugin.typeStreak <= 1) return;
+
     clearTimeout(this.comboResultTimeout);
     this.comboResultTimeout = setTimeout(
       this.endTypeStreak,
