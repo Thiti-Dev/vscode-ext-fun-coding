@@ -46,7 +46,8 @@ export class FCPlugin implements CoreEventsOverridedMethods {
 
   public onTyping(event: TextDocumentChangeEvent): void {
     const text: string = event.contentChanges[0]?.text;
-    if (!text || text.length !== 1) {
+    console.log(text);
+    if (!text || text.length !== 1 || text === " ") {
       return;
     }
 
