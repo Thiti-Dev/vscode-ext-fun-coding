@@ -24,11 +24,11 @@ export class ComboStage {
 
   private createcomboStageDecoration() {
     this.comboStageDecoration?.dispose();
-    const textSize = 36, // fixed
+    const textSize = FCUtils.getCurrentFontSize(), // fixed
       color = "green"; // fixed
     const baseCss = FCUtils.cssObjectToString({
-      top: `-${FCUtils.getCurrentFontSize() * 1.6}px`,
-      ["font-size"]: textSize,
+      top: `-${FCUtils.getCurrentFontSize() * 1.65}px`,
+      ["font-size"]: textSize + "px",
       ["text-shadow"]: `0px 0px 15px ${color}`,
     });
     const lightThemeCss = FCUtils.cssObjectToString({
