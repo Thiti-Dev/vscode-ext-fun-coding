@@ -5,8 +5,7 @@ import { FCUtils } from "../fun-coding/fc-utils";
 
 export class TypePerformance {
   private static readonly DEFAULT_CSS = FCUtils.cssObjectToString({
-    position: "relative",
-    ["padding-left"]: "10px",
+    position: "absolute",
     ["font-family"]: "monospace",
     ["font-weight"]: "900",
     ["z-index"]: 1,
@@ -20,47 +19,62 @@ export class TypePerformance {
     this.createTypePerformanceDecoration();
   }
   private createTypePerformanceDecoration() {
-    this.typePerformanceDecoration?.dispose();
-    const textSize = 24, // fixed
-      color = "red"; // fixed
-    const baseCss = FCUtils.cssObjectToString({
-      ["font-size"]: textSize,
-      ["text-shadow"]: `0px 0px 15px ${color}`,
-    });
-    const lightThemeCss = FCUtils.cssObjectToString({
-      ["-webkit-text-stroke"]: `2px ${color}`,
-    });
-
-    const createComboCountAfterDecoration = (
-      lightTheme?: boolean
-    ): DecorationRenderOptions => {
-      return {
-        after: {
-          margin: "0.5em 0 0 0",
-          contentText: `${FCPlugin.getTypeStreak()} letters in ${FCPlugin.getTypeStreakTimePerformance()} sec`,
-          color: "#FFFFFF",
-          textDecoration: `none; ${TypePerformance.DEFAULT_CSS} ${baseCss} ${
-            lightTheme ? lightThemeCss : ""
-          }`,
-        },
-      };
-    };
-
-    this.typePerformanceDecoration =
-      vscode.window.createTextEditorDecorationType({
-        ...createComboCountAfterDecoration(),
-        rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
-        light: createComboCountAfterDecoration(true),
+    const pastTypeStreak = FCPlugin.getTypeStreak(),
+      pastPerf = FCPlugin.getTypeStreakTimePerformance(),
+      pastRange = FCUtils.getCurrentCursorPositionVscodeRange(),
+      pastEditor = vscode.window.activeTextEditor!;
+    const performAnimateDisplay = (frame: number) => {
+      this.typePerformanceDecoration?.dispose(); // remove the prev [simulate update]
+      const textSize = FCUtils.getCurrentFontSize(), // fixed
+        color = "red"; // fixed
+      const baseCss = FCUtils.cssObjectToString({
+        ["top"]: `-${frame}px`,
+        ["font-size"]: textSize + Math.floor(frame / 7.5) + "px",
+        ["text-shadow"]: `0px 0px 15px ${color}`,
+      });
+      const lightThemeCss = FCUtils.cssObjectToString({
+        ["-webkit-text-stroke"]: `2px ${color}`,
       });
 
-    const editor = vscode.window.activeTextEditor!;
-    const cursorPosition = editor.selection.active;
-    const range = new vscode.Range(cursorPosition, cursorPosition);
-    editor.setDecorations(this.typePerformanceDecoration, [range]);
+      const createTypePerformanceDecoration = (
+        lightTheme?: boolean
+      ): DecorationRenderOptions => {
+        return {
+          after: {
+            margin: `0.5em 0 0 -${Math.floor(frame / 2)}px`,
+            contentText:
+              frame < 50 ? `${pastTypeStreak} letters` : `in ${pastPerf} sec`,
+            color: "#FFFFFF",
+            textDecoration: `none; ${TypePerformance.DEFAULT_CSS} ${baseCss} ${
+              lightTheme ? lightThemeCss : ""
+            }`,
+          },
+        };
+      };
 
-    const pastDecor = this.typePerformanceDecoration;
-    setTimeout(() => {
-      pastDecor.dispose();
-    }, 2500);
+      this.typePerformanceDecoration =
+        vscode.window.createTextEditorDecorationType({
+          ...createTypePerformanceDecoration(),
+          rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
+          light: createTypePerformanceDecoration(true),
+        });
+
+      pastEditor.setDecorations(this.typePerformanceDecoration, [pastRange]);
+
+      if (frame < 100) {
+        setTimeout(() => {
+          performAnimateDisplay(frame + 1);
+        }, 20);
+      } else {
+        this.typePerformanceDecoration?.dispose();
+      }
+    };
+
+    performAnimateDisplay(0);
+
+    // const pastDecor = this.typePerformanceDecoration;
+    // setTimeout(() => {
+    //   pastDecor.dispose();
+    // }, 2500);
   }
 }
