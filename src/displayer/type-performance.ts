@@ -21,7 +21,7 @@ export class TypePerformance {
   private createTypePerformanceDecoration() {
     const pastTypeStreak = FCPlugin.getTypeStreak(),
       pastPerf = FCPlugin.getTypeStreakTimePerformance(),
-      pastRange = FCUtils.getCurrentCursorPositionVscodeRange(),
+      pastRange = FCPlugin.getLatestCursorPosition(),
       pastEditor = vscode.window.activeTextEditor!;
     const performAnimateDisplay = (frame: number) => {
       this.typePerformanceDecoration?.dispose(); // remove the prev [simulate update]
