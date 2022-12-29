@@ -5,7 +5,7 @@ This is the extension for Visual Studio Code which will generize a visual text t
 ## 🌟 Demo
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/36455825/209767370-ff01e5bd-93fd-45cf-b382-3e5a645e470d.gif">
+<img src="https://user-images.githubusercontent.com/36455825/209904277-95afd713-c966-4e86-a785-4bbe2b64b6ab.gif">
 </p>
 
 ### ✨ Features
