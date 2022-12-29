@@ -20,7 +20,7 @@ This is the extension for Visual Studio Code which will generize a visual text t
 
 # CHANGELOG
 
-## 0.0.3 (2022-12-29)
+## 0.1.0 (2022-12-29)
 
 Compatibility:
 
