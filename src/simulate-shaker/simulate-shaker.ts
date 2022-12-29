@@ -112,7 +112,7 @@ export class SimulateShaker implements ICoreEvents {
     this.shakeDecorations.forEach((decor) => decor.dispose());
   }
   public onTyping() {
-    if (FCPlugin.getTypeStreak() <= 20) return;
+    if (FCPlugin.getTypeStreak() < 30) return;
     this.simulateShaking(); // perform the shake
   }
 }
