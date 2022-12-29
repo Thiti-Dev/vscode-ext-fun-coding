@@ -25,9 +25,10 @@ export class ComboStage {
   private createcomboStageDecoration() {
     this.comboStageDecoration?.dispose();
     const textSize = FCUtils.getCurrentFontSize(), // fixed
-      color = "green"; // fixed
+      color = `hsl(${100 - FCPlugin.getTypeStreak() * 2}, 100%, 45%)`; // dymamic based on currentTypeStreak
     const baseCss = FCUtils.cssObjectToString({
       top: `-${FCUtils.getCurrentFontSize() * 1.65}px`,
+      transform: `rotate(${FCUtils.getRandomNumberBetween(-70, 70)}deg)`,
       ["font-size"]: textSize + "px",
       ["text-shadow"]: `0px 0px 15px ${color}`,
     });
