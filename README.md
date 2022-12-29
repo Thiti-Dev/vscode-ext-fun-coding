@@ -3,21 +3,28 @@
 This is the extension for Visual Studio Code which will generize a visual text that indicates you typing performance on your screen
 
 ## 🌟 Demo
+
 <p align="center">
 <img src="https://user-images.githubusercontent.com/36455825/209767370-ff01e5bd-93fd-45cf-b382-3e5a645e470d.gif">
 </p>
 
-
-
-
 ### ✨ Features
+
 - Display the typing performance (letters per sec)
 - Display the combo stage every 10x letters
 - Shake the screen if going over 20x letters streak
 
 ### 🚩 Note
-- May not working well if the Error Lens extension install. Use us instead -> [link] -> Errors PeekAboo
+
+- ~~May not working well if the Error Lens OR GitLens extension install~~
+
 # CHANGELOG
+
+## 0.0.3 (2022-12-29)
+
+Compatibility:
+
+- Now fully working properly with Git-lens & Errors-lens enabled
 
 ## 0.0.21 (2022-12-28)
 
