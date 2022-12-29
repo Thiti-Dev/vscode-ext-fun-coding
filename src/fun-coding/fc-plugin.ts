@@ -1,7 +1,8 @@
-import type { TextDocumentChangeEvent } from "vscode";
+import type { TextDocumentChangeEvent, Range } from "vscode";
 import { ICoreEvents } from "../interfaces/core-events";
 import { SimulateShaker } from "../simulate-shaker/simulate-shaker";
 import Displayer from "../displayer";
+import { FCUtils } from "./fc-utils";
 
 interface CoreEventsOverridedMethods extends Omit<ICoreEvents, "onTyping"> {
   onTyping(event: TextDocumentChangeEvent): void;
@@ -12,9 +13,13 @@ export class FCPlugin implements CoreEventsOverridedMethods {
   private static typeStreak: number = 0;
   private static streakStartAt: number = -1;
   private static streakStopAt: number = -1;
+  private static latestCursorPositionTheMomentWhenJustTyped: Range;
   private comboResultTimeout: NodeJS.Timeout | undefined;
   constructor(private shakerInstance: SimulateShaker) {}
 
+  public static getLatestCursorPosition() {
+    return this.latestCursorPositionTheMomentWhenJustTyped;
+  }
   public static getTypeStreak() {
     return this.typeStreak;
   }
@@ -47,6 +52,9 @@ export class FCPlugin implements CoreEventsOverridedMethods {
   }
 
   public onTyping(event: TextDocumentChangeEvent): void {
+    FCPlugin.latestCursorPositionTheMomentWhenJustTyped =
+      FCUtils.getCurrentCursorPositionVscodeRange();
+
     const text: string = event.contentChanges[0]?.text;
     if (!text || text.length !== 1 || text === " ") {
       return;
