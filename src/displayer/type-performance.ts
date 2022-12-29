@@ -23,10 +23,17 @@ export class TypePerformance {
       pastPerf = FCPlugin.getTypeStreakTimePerformance(),
       pastRange = FCPlugin.getLatestCursorPosition(),
       pastEditor = vscode.window.activeTextEditor!;
+
+    let pastColor: string,
+      pastColorStamp: number = -1;
     const performAnimateDisplay = (frame: number) => {
       this.typePerformanceDecoration?.dispose(); // remove the prev [simulate update]
+      if (Date.now() - pastColorStamp > 400) {
+        pastColorStamp = Date.now();
+        pastColor = "#" + Math.floor(Math.random() * 16777215).toString(16); // random the color
+      }
       const textSize = FCUtils.getCurrentFontSize(), // fixed
-        color = "red"; // fixed
+        color = pastColor;
       const baseCss = FCUtils.cssObjectToString({
         ["top"]: `-${frame}px`,
         ["font-size"]: textSize + Math.floor(frame / 7.5) + "px",
