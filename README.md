@@ -1,6 +1,6 @@
 ## 🎩 About The Project
 
-This is the extension for Visual Studio Code which will generize a visual text that indicates you typing performance on your screen
+This is the extension for Visual Studio Code which will generize a visual text that indicates your typing performance on your screen
 
 ## 🌟 Demo
 
@@ -12,13 +12,24 @@ This is the extension for Visual Studio Code which will generize a visual text t
 
 - Display the typing performance (letters per sec)
 - Display the combo stage every 10x letters
-- Shake the screen if going over 20x letters streak
+- Shake the screen if going over 30x letters streak
 
 ### 🚩 Note
 
 - ~~May not working well if the Error Lens OR GitLens extension install~~
 
 # CHANGELOG
+
+## 0.2.0 (2022-12-29)
+
+Enhancement:
+
+- ComboStage display now have dynamic color and rotation
+- TypePerformance display now have dynamic random color as it floating up
+
+Adjust:
+
+- 30x letters streak to start the shake-simulation
 
 ## 0.1.0 (2022-12-29)
 
